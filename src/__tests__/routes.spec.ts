@@ -1,8 +1,8 @@
 import request from "supertest";
 import { v4 } from "uuid";
-
 import { app } from "../index";
 import { UsersRepository } from "../modules/users/repositories/implementations/UsersRepository";
+
 
 describe("[POST] /users", () => {
   it("should be able to create new users", async () => {
@@ -114,7 +114,7 @@ describe("[GET] /users", () => {
     });
 
     const response = await request(app).get("/users").set("user_id", user1.id);
-
+    console.log(response.body)
     expect(
       response.body.map((res) => ({
         ...res,
