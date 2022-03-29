@@ -19,7 +19,15 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    const user = new User(name, email)
+    const userAlreadyExists = this.findByEmail(email);
+    if(userAlreadyExists) throw new Error("User already exist.")
+    const user = new User()
+    Object.assign(user, {
+      name: name,
+      email: email,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
     this.users.push(user);
     return user;
   }
@@ -36,6 +44,7 @@ class UsersRepository implements IUsersRepository {
 
   turnAdmin(receivedUser: User): User {
     receivedUser.turnAdmin();
+    receivedUser.attUpdate_at();
     return receivedUser;
   }
 

@@ -1,19 +1,21 @@
 import { validate } from "uuid";
-
 import { UsersRepository } from "../../../modules/users/repositories/implementations/UsersRepository";
+
 
 describe("UsersRepository", () => {
   let usersRepository: UsersRepository;
+  const user = usersRepository.create({
+    name: "Vinicius Fraga",
+    email: "vinifraga@rocketseat.com",
+  });
 
   beforeAll(() => {
     usersRepository = UsersRepository.getInstance();
+    
   });
 
   it("should be able to create new users", () => {
-    const user = usersRepository.create({
-      name: "Vinicius Fraga",
-      email: "vinifraga@rocketseat.com",
-    });
+
 
     expect(user).toMatchObject({
       name: "Vinicius Fraga",
@@ -37,10 +39,7 @@ describe("UsersRepository", () => {
   });
 
   it("should be able to find user by ID", () => {
-    const user = usersRepository.create({
-      name: "Vinicius Fraga",
-      email: "vinifraga@rocketseat.com",
-    });
+
 
     const findUser = usersRepository.findById(user.id);
 
@@ -55,10 +54,7 @@ describe("UsersRepository", () => {
   });
 
   it("should be able to find user by e-mail address", () => {
-    const user = usersRepository.create({
-      name: "Vinicius Fraga",
-      email: "vinifraga@rocketseat.com",
-    });
+
 
     const findUser = usersRepository.findByEmail(user.email);
 
@@ -73,10 +69,7 @@ describe("UsersRepository", () => {
   });
 
   it("should be able to turn an user as admin", () => {
-    const user = usersRepository.create({
-      name: "Vinicius Fraga",
-      email: "vinifraga@rocketseat.com",
-    });
+
 
     const admin = usersRepository.turnAdmin(user);
 
