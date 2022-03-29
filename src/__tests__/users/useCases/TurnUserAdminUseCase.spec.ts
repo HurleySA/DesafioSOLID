@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
-
 import { UsersRepository } from "../../../modules/users/repositories/implementations/UsersRepository";
 import { TurnUserAdminUseCase } from "../../../modules/users/useCases/turnUserAdmin/TurnUserAdminUseCase";
+
 
 describe("TurnUserAdminUseCase", () => {
   let usersRepository: UsersRepository;
@@ -21,7 +21,7 @@ describe("TurnUserAdminUseCase", () => {
     const updatedUser = turnUserAdminUseCase.execute({ user_id: user.id });
 
     expect(updatedUser.admin).toBe(true);
-    expect(usersRepository.list()).toStrictEqual(
+    expect(usersRepository.list(user.id)).toStrictEqual(
       expect.arrayContaining([updatedUser])
     );
   });
