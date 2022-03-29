@@ -10,7 +10,8 @@ interface IUsersRepository {
   findById(id: string): User | undefined;
   findByEmail(email: string): User | undefined;
   turnAdmin(user: User): User;
-  list(): User[];
+  list(id: string): User[];
 }
 
 export { IUsersRepository, ICreateUserDTO };
+

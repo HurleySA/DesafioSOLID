@@ -48,7 +48,9 @@ class UsersRepository implements IUsersRepository {
     return receivedUser;
   }
 
-  list(): User[] {
+  list(id: string): User[] {
+    const user = this.users.find(user => user.id === id && user.admin ===  true)
+    if(!user) throw new Error("ID não permitido para listagem.");
     return this.users;
   }
 }
