@@ -3,15 +3,10 @@ import { UsersRepository } from "../../../modules/users/repositories/implementat
 
 
 describe("UsersRepository", () => {
-  let usersRepository: UsersRepository;
+  let usersRepository: UsersRepository = UsersRepository.getInstance();;
   const user = usersRepository.create({
     name: "Vinicius Fraga",
     email: "vinifraga@rocketseat.com",
-  });
-
-  beforeAll(() => {
-    usersRepository = UsersRepository.getInstance();
-    
   });
 
   it("should be able to create new users", () => {
@@ -32,8 +27,9 @@ describe("UsersRepository", () => {
       name: "Danilo Vieira",
       email: "danilo@rocketseat.com",
     });
+    user.turnAdmin();
 
-    const users = usersRepository.list();
+    const users = usersRepository.list(user.id);
 
     expect(users).toStrictEqual(expect.arrayContaining([user]));
   });
